@@ -10,18 +10,22 @@ def GetInputList(path):
             data.append(array)
         return data
 
+
 def GetLetter(input, x, y):
     letter = input[y][x]
     return letter.replace('S', 'a').replace('E', 'z')
 
+
 def Node(x, y):
     return str(x)+'|'+str(y)
+
 
 def GetCord(input, letter):
     for y in range(len(input)):
         line = input[y]
         if (x := line.find(letter)) > -1:
             return Node(x, y)
+
 
 def GetACords(input):
     letters = []
@@ -31,7 +35,6 @@ def GetACords(input):
             if (letter == 'a'):
                 letters.append(Node(x, y))
     return letters
-
 
 
 # Function to build the graph
@@ -108,7 +111,7 @@ def BFS_SP(graph, start, goal):
                 # neighbour node is the goal
                 if neighbour == goal:
                     #print("Shortest path = ", *new_path)
-                    #print(len(new_path)-1)
+                    # print(len(new_path)-1)
                     return len(new_path)-1
             explored.append(node)
 
@@ -132,7 +135,8 @@ print("Part 1:", min)
 aCords = GetACords(input)
 for aCord in aCords:
     current = BFS_SP(graph, aCord, ECord)
-    if(isinstance(current, int)):
-        if(current < min): min = current
+    if (isinstance(current, int)):
+        if (current < min):
+            min = current
 
 print("Part 2:", min)
