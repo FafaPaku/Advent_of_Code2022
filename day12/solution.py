@@ -14,11 +14,14 @@ def GetLetter(input, x, y):
     letter = input[y][x]
     return letter.replace('S', 'a').replace('E', 'z')
 
+def Node(x, y):
+    return str(x)+'|'+str(y)
+
 def GetCord(input, letter):
     for y in range(len(input)):
         line = input[y]
         if (x := line.find(letter)) > -1:
-            return str(x)+'|'+str(y)
+            return Node(x, y)
 
 def GetACords(input):
     letters = []
@@ -26,16 +29,12 @@ def GetACords(input):
         for x in range(len(input[0])):
             letter = GetLetter(input, x, y)
             if (letter == 'a'):
-                letters.append(str(x)+'|'+str(y))
+                letters.append(Node(x, y))
     return letters
 
 
 
-# Python3 implementation to build a
-# graph using Dictionaries
 # Function to build the graph
-
-
 def build_graph(input):
 
     edges = []
@@ -50,25 +49,21 @@ def build_graph(input):
             # check left
             if (x+1 < maxX):
                 if (ord(GetLetter(input, x+1, y)) - ord(GetLetter(input, x, y)) <= 1):
-                    graph[str(x)+'|'+str(y)].append(str(x+1)+'|'+str(y))
+                    graph[Node(x, y)].append(Node(x+1, y))
             # check right
             if (x-1 >= 0):
                 if (ord(GetLetter(input, x-1, y)) - ord(GetLetter(input, x, y)) <= 1):
-                    graph[str(x)+'|'+str(y)].append(str(x-1)+'|'+str(y))
+                    graph[Node(x, y)].append(Node(x-1, y))
             # check up
             if (y-1 >= 0):
                 if (ord(GetLetter(input, x, y-1)) - ord(GetLetter(input, x, y)) <= 1):
-                    graph[str(x)+'|'+str(y)].append(str(x)+'|'+str(y-1))
+                    graph[Node(x, y)].append(Node(x, y-1))
             # check down
             if (y+1 < maxY):
                 if (ord(GetLetter(input, x, y+1)) - ord(GetLetter(input, x, y)) <= 1):
-                    graph[str(x)+'|'+str(y)].append(str(x)+'|'+str(y+1))
+                    graph[Node(x, y)].append(Node(x, y+1))
 
     return graph
-
-# def GetLetter(input, x, y):
-#     letter = input[y][x]
-#     return letter.replace('S','a').replace('E','z')
 
 # Python implementation to find the
 # shortest path in the graph using
@@ -119,8 +114,8 @@ def BFS_SP(graph, start, goal):
 
     # Condition when the nodes
     # are not connected
-    print("So sorry, but a connecting"
-          "path doesn't exist :(")
+    # print("So sorry, but a connecting"
+    #       " path doesn't exist :(")
     return
 
 
@@ -129,16 +124,15 @@ graph = build_graph(input)
 SCord = GetCord(input, 'S')
 ECord = GetCord(input, 'E')
 
-# print(graph)
+
 # Function Call
 min = BFS_SP(graph, SCord, ECord)
-print(min)
+print("Part 1:", min)
 
 aCords = GetACords(input)
-print(aCords)
 for aCord in aCords:
     current = BFS_SP(graph, aCord, ECord)
     if(isinstance(current, int)):
         if(current < min): min = current
 
-print(min)
+print("Part 2:", min)
