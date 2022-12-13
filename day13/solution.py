@@ -68,5 +68,3 @@ second = result.index([[2]]) + 1
 sixth = result.index([[6]]) +1
 
 print('Part2: ',second * sixth )
-
-print(ComparePackets([1], [1]))
