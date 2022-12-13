@@ -1,35 +1,5 @@
 import functools
 
-
-# def mycmp(right, left):
-#     print("Compare ", left, " vs ", right)
-#     if left < right:
-#         return 1
-#     elif left > right:
-#         return -1
-#     else:
-#         return 0
-
-
-# print(min([3, 5], key=functools.cmp_to_key(mycmp)))
-# print(max([3, 5], key=functools.cmp_to_key(mycmp)))
-# print(min([1, 1], key=functools.cmp_to_key(mycmp)))
-
-# def packet_cmp(a: list[Packet], b: list[Packet]) -> int:
-#   result = 0
-
-#   for i in range(min(len(a), len(b))):
-#     match isinstance(a[i], list), isinstance(b[i], list):
-#       case True, True: result = packet_cmp(a[i], b[i])
-#       case True, False: result = packet_cmp(a[i], [b[i]])
-#       case False, True: result = packet_cmp([a[i]], b[i])
-#       case _: result = (a[i] > b[i]) - (a[i] < b[i])
-
-#     if result:
-#       return result
-
-#   return (len(a) > len(b)) - (len(a) < len(b))
-
 def GetInputList(path):
     data = []
     with open(path) as file:
